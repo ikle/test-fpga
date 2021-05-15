@@ -1,0 +1,16 @@
+SYSCONFIG COMPRESS_CONFIG=ON;
+
+LOCATE    COMP "pad_osc" SITE "P3";
+IOBUF     PORT "pad_osc" IO_TYPE=LVCMOS33;
+FREQUENCY PORT "pad_osc" 25 MHZ;
+
+LOCATE    COMP "pad_led" SITE "U16";
+IOBUF     PORT "pad_led" IO_TYPE=LVCMOS25;
+
+# P5 #
+
+LOCATE  COMP "pad_uart_tx"  SITE "J17";
+LOCATE  COMP "pad_uart_rx"  SITE "H18";
+
+IOBUF   PORT "pad_uart_tx"  IO_TYPE=LVCMOS33;
+IOBUF   PORT "pad_uart_rx"  IO_TYPE=LVCMOS33;
