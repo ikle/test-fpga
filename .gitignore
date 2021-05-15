@@ -1,0 +1,14 @@
+*.swp
+
+*.o
+*.a
+*.so.*
+*.pc
+*-test
+
+*.bit
+*.log
+*.trellis
+*.vcd
+*.vvp
+*.yosys
