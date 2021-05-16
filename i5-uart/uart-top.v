@@ -91,15 +91,15 @@ endmodule
  * Top design module
  */
 module top (
-	input pad_osc, input pad_uart_rx, output pad_uart_tx, output pad_led
+	input osc, input UART_rx, output UART_tx, output led_n
 );
 	wire reset_s;
 
-	reset_gen r0 (0, pad_osc, reset_s);
+	reset_gen r0 (0, osc, reset_s);
 
 	wire uart_clock_256, uart_clock_ok;
 
-	uart_pll pll0 (0, pad_osc, uart_clock_256, uart_clock_ok);
+	uart_pll pll0 (0, osc, uart_clock_256, uart_clock_ok);
 
 	wire uart_clock_16, uart_clock;
 
@@ -107,7 +107,7 @@ module top (
 	clock_div_pow2 #(4) c1 (reset_s, uart_clock_16,  uart_clock);
 
 	uart_tb u0 (reset_s, uart_clock_16, uart_clock,
-		    pad_uart_rx, pad_uart_tx);
+		    UART_rx, UART_tx);
 
-	clock_div_pow2 #(16) c2 (reset_s, uart_clock, pad_led);
+	clock_div_pow2 #(16) c2 (reset_s, uart_clock, led_n);
 endmodule
