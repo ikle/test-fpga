@@ -35,7 +35,7 @@ endmodule
  */
 module hello_rom (
 	input reset,
-	output reg [7:0] out, input get, output empty
+	output reg [7:0] out, (* noglobal *) input get, output empty
 );
 	localparam N = 7;
 	localparam W = $clog2 (N + 1);

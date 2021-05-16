@@ -43,8 +43,8 @@ module fifo #(
 	parameter W = 8, ORDER = 4
 )(
 	input reset,
-	input [W-1:0] in, input put, output full,
-	output reg [W-1:0] out, input get, output empty
+	input [W-1:0] in, (* noglobal *) input put, output full,
+	output reg [W-1:0] out, (* noglobal *) input get, output empty
 );
 	reg [W-1:0] ram [2**ORDER-1:0];
 	wire [ORDER-1:0] w, r;
