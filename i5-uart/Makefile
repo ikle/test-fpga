@@ -1,5 +1,5 @@
 STREAM	= uart.bit
-TARGET	= uart-rx.vcd uart-tx.vcd $(STREAM)
+TARGET	= crossbar.vcd uart-rx.vcd uart-tx.vcd $(STREAM)
 
 ARCH	= ecp5
 CHIP	= --25k --speed 6 --package CABGA381
@@ -44,6 +44,8 @@ uart-pll.v:
 	ecppll -i 25.0 -o 29.4912 --highres -f $@ \
 	       -n uart_pll --clkin_name clock_i --clkout0_name clock_o \
 	       --standby
+
+crossbar.vvp: crossbar.v
 
 uart-rx.vvp:	clock.v fifo.v uart-rx.v
 uart-tx.vvp:	clock.v fifo.v uart-tx.v
