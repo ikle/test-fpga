@@ -12,7 +12,7 @@
 module reset_gen #(
 	parameter W = 3
 )(
-	input  reset_i,	input clock, output reset_o
+	input reset_i, input clock, output reset_o
 );
 	reg [W-1:0] counter;
 
