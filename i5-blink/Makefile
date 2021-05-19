@@ -1,3 +1,4 @@
+LIBRARY	= $(CURDIR)/../rtl
 STREAM	= blink.bit
 TARGET	= $(STREAM)
 
@@ -12,7 +13,7 @@ all: $(TARGET)
 
 # VCD from Verilog testbench
 
-VC ?= iverilog -gspecify
+VC ?= iverilog -gspecify -I$(LIBRARY)
 
 %.vvp: %-tb.v
 	$(VC) $(VFLAGS) -o $@ $<
@@ -22,8 +23,11 @@ VC ?= iverilog -gspecify
 
 # bit stream from Verilog
 
+YPREFIX	= verilog_defaults -add -I$(LIBRARY);
+YSUFFIX	= synth_$(ARCH) -top top -abc9
+
 %.yosys: %-top.v
-	yosys -QT -p "synth_$(ARCH) -top top -abc9 -json $@" $<
+	yosys -QT -p "$(YPREFIX) read_verilog $<; $(YSUFFIX) -json $@"
 
 %.trellis: %.yosys %.lpf
 	nextpnr-$(ARCH) $(CHIP) $(BOARD) $(DESIGN) --json $< --textcfg $@
