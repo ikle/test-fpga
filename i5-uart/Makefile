@@ -49,6 +49,4 @@ uart-pll.v:
 	       -n uart_pll --clkin_name clock_i --clkout0_name clock_o \
 	       --standby
 
-crossbar.vvp: crossbar.v
-
 uart.yosys: uart-pll.v
