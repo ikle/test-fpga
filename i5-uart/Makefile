@@ -47,6 +47,6 @@ uart-pll.v:
 
 crossbar.vvp: crossbar.v
 
-uart-rx.vvp:	clock.v fifo.v uart-rx.v
-uart-tx.vvp:	clock.v fifo.v uart-tx.v
+uart-rx.vvp:	clock.v counter.v fifo.v uart-rx.v
+uart-tx.vvp:	clock.v counter.v fifo.v uart-tx.v
 uart.yosys:	reset.v uart-pll.v clock.v fifo.v uart-rx.v uart-tx.v
