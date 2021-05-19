@@ -14,10 +14,7 @@ module demux #(
 )(
 	input [W-1:0] s, input d, output [N-1:0] q
 );
-	genvar i;
-
-	for (i = 0; i < N; i = i + 1)
-		assign q[i] = (s == i) ? d : 1'b0;
+	assign q = {{N-1 {1'b0}}, d} << s;
 endmodule
 
 module crossbar #(
