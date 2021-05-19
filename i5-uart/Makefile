@@ -51,6 +51,6 @@ uart-pll.v:
 
 crossbar.vvp: crossbar.v
 
-uart-rx.vvp:	clock.v uart-rx.v
-uart-tx.vvp:	clock.v uart-tx.v
-uart.yosys:	uart-pll.v clock.v uart-rx.v uart-tx.v
+uart-rx.vvp:	uart-rx.v
+uart-tx.vvp:	uart-tx.v
+uart.yosys:	uart-pll.v uart-rx.v uart-tx.v
