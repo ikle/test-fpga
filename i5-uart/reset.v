@@ -14,7 +14,7 @@ module reset_gen #(
 )(
 	input reset_i, input clock, output reset_o
 );
-	reg [W-1:0] counter;
+	reg [W-1:0] counter = 0;  /* for FPGA w/o reset line */
 
 	assign reset_o = ~counter[W-1];
 
