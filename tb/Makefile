@@ -1,5 +1,5 @@
 LIBRARY	= $(CURDIR)/../rtl
-TARGET	= crossbar.vcd spi-master.vcd uart-rx.vcd uart-tx.vcd
+TARGET	= crossbar.vcd spi-master.vcd timeout.vcd uart-rx.vcd uart-tx.vcd
 
 .PHONY: all clean prog
 
