@@ -17,7 +17,7 @@ module spi_lcd_wait #(
 	parameter FREQ = 25_000_000, DELAY = 120
 )(
 	input reset, input clock,
-	input [8:0] data, input get, output ready_n
+	input [8:0] in, input get, output ready_n
 );
 	localparam SWRESET = 9'h001;
 	localparam SLPIN   = 9'h010;
@@ -27,13 +27,21 @@ module spi_lcd_wait #(
 	localparam TW      = $clog2 (TIMEOUT);
 
 	wire [TW-1:0] count;
-	wire power_cmd, put;
+	wire power_cmd;
 
 	assign count     = TIMEOUT;
 	assign power_cmd = data == SWRESET | data == SLPIN | data == SLPOUT;
-	assign put       = get & power_cmd;
 
-	timeout #(TW) t0 (reset, clock, count, put, ready_n);
+	reg [8:0] data;
+
+	always @(posedge clock) #1
+		if (reset | power_cmd)
+			data <= 0;
+		else
+		if (get)		// todo: get_s + in_s?
+			data <= in;
+
+	timeout #(TW) t0 (reset, clock, count, power_cmd, ready_n);
 endmodule
 
 module spi_lcd #(
