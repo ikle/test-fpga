@@ -1,6 +1,6 @@
 LIBRARY	= $(CURDIR)/../rtl
 STREAM	= uart.bit
-TARGET	= crossbar.vcd uart-rx.vcd uart-tx.vcd $(STREAM)
+TARGET	= $(STREAM)
 
 ARCH	= ecp5
 CHIP	= --25k --speed 6 --package CABGA381
