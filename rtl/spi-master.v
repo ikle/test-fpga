@@ -13,15 +13,16 @@ module spi_master #(
 	parameter W = 8
 )(
 	input reset, input clock,
-	input [W-1:0] in, output reg get, input empty,
+	input dc, input [W-1:0] in, output reg get, input empty,
 	output reg [W-1:0] out, output reg put, input full,
-	output spi_cs_n, output reg spi_clock, output spi_mosi, input spi_miso
+	output spi_cs_n, output reg spi_clock,
+	output spi_dc, output spi_mosi, input spi_miso
 );
 	localparam STOP = {1'b1, {W {1'b0}}};
 
 	reg avail;
-	reg [W-1:0] data;
-	reg [W:0] state;
+	reg [W:0] data;
+	reg [W*2:0] state;
 
 	wire stop = (state[W:0]   == STOP);
 	wire last = (state[W-1:0] == STOP >> 1);
@@ -41,12 +42,12 @@ module spi_master #(
 		end
 		else begin
 			if (get) begin
-				data  <= in;
+				data  <= {dc, in};
 				avail <= 1;
 			end
 
 			if (stop & avail) begin
-				state <= {data[W-1:0], 1'b1};
+				state <= {{W {data[W]}}, data[W-1:0], 1'b1};
 				avail <= 0;
 			end
 
@@ -56,7 +57,7 @@ module spi_master #(
 
 				if (!stop & spi_clock) begin
 					if (last & avail) begin
-						state <= {data[W-1:0], 1'b1};
+						state <= {{W {data[W]}}, data[W-1:0], 1'b1};
 						avail <= 0;
 					end
 					else
@@ -71,6 +72,7 @@ module spi_master #(
 		end
 
 	assign spi_cs_n = stop;
+	assign spi_dc   = !stop & state[W*2];
 	assign spi_mosi = !stop & state[W];
 endmodule
 

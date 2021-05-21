@@ -12,20 +12,20 @@
 
 module hello_rom (
 	input reset,
-	output reg [7:0] out, input get, output empty
+	output reg [8:0] out, input get, output empty
 );
 	localparam N = 7;
 	localparam W = $clog2 (N + 1);
 
-	wire [7:0] m[N-1:0];
+	wire [8:0] m[N-1:0];
 
-	assign  m[0] = 8'h48;
-	assign  m[1] = 8'h65;
-	assign  m[2] = 8'h6C;
-	assign  m[3] = 8'h6C;
-	assign  m[4] = 8'h6F;
-	assign  m[5] = 8'h0D;
-	assign  m[6] = 8'h0A;
+	assign  m[0] = 9'h048;
+	assign  m[1] = 9'h165;
+	assign  m[2] = 9'h16C;
+	assign  m[3] = 9'h06C;
+	assign  m[4] = 9'h16F;
+	assign  m[5] = 9'h00D;
+	assign  m[6] = 9'h00A;
 
 	reg [W-1:0] index;
 
@@ -55,13 +55,16 @@ module tb;
 
 	always	# 2.5	clock = ~clock;
 
-	wire [7:0] in, out;
+	wire [8:0] in;
+	wire [7:0] out;
 	wire get, empty, put;
-	wire spi_cs_n, spi_clock, spi_mosi, spi_miso;
+	wire spi_cs_n, spi_clock, spi_dc, spi_mosi, spi_miso;
 
 	hello_rom  r0 (reset, in, get, empty);
-	spi_master s0 (reset, clock, in, get, empty, out, put, full,
-		       spi_cs_n, spi_clock, spi_mosi, spi_miso);
+	spi_master s0 (reset, clock,
+		       in[8], in[7:0], get, empty,
+		       out, put, full,
+		       spi_cs_n, spi_clock, spi_dc, spi_mosi, spi_miso);
 
 	assign spi_miso = spi_mosi;  /* echo back */
 
