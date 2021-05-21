@@ -63,12 +63,12 @@ module spi_lcd #(
 
 	spi_lcd_wait #(FREQ, DELAY) w0 (reset, clock, spi_in, spi_get, ready_n);
 
-	spi_master s0 (reset, clock, spi_in[7:0], spi_get, spi_empty | ready_n,
+	spi_master s0 (reset, clock,
+		       spi_in[8], spi_in[7:0], spi_get, spi_empty | ready_n,
 		       spi_out, spi_put, spi_full,
-		       LCD_cs_n, LCD_clock, LCD_mosi, LCD_miso);
+		       LCD_cs_n, LCD_clock, LCD_dc, LCD_mosi, LCD_miso);
 
 	assign LCD_reset_n = ~reset;
-	assign LCD_dc = spi_in[8];
 endmodule
 
 `endif  /* SPI_LCD_V */
