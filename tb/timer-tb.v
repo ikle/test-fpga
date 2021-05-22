@@ -9,6 +9,7 @@
 `timescale 1ns / 100ps
 
 `include "timer/alarm.v"
+`include "timer/pulse.v"
 `include "timer/timeout.v"
 
 module tb;
@@ -24,7 +25,7 @@ module tb;
 
 	reg [7:0] value;
 	reg put = 0;
-	wire bell, full;
+	wire bell, full, act;
 
 	initial begin
 		# 40	value <= 8'h19;
@@ -34,6 +35,7 @@ module tb;
 
 	alarm   t0 (reset, clock, value, put, bell);
 	timeout t1 (reset, clock, value, put, full);
+	pulse   t2 (reset, clock, value, put, act);
 
 	initial begin
 		$dumpfile ("timer.vcd");
