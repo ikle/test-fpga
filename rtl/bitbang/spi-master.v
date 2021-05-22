@@ -26,10 +26,10 @@ module spi_master #(
 
 	wire [BW-1:0] ai, bi, ci, do;
 
-	bitbang #(BW) a (reset, clock, ai,    ,      ,   ,    , 1'b1, spi_cs_n );
-	bitbang #(BW) b (reset, clock, bi,    ,      ,   ,    , 1'b0, spi_clock);
+	bitbang #(BW) a (reset, clock, ai,    , empty,   ,    , 1'b1, spi_cs_n );
+	bitbang #(BW) b (reset, clock, bi,    , empty,   ,    , 1'b0, spi_clock);
 	bitbang #(BW) c (reset, clock, ci, get, empty,   ,    , 1'b0, spi_mosi );
-	bitbang #(BW) d (reset, clock, do,    ,      , do, put, spi_miso,      );
+	bitbang #(BW) d (reset, clock, do,    , empty, do, put, spi_miso,      );
 
 	assign ai = {W {2'b00}};	/* cs_n active low */
 	assign bi = {W {2'b01}};	/* clock mode 0    */
