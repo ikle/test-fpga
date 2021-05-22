@@ -1,5 +1,7 @@
 LIBRARY	= $(CURDIR)/../rtl
-TARGET	= crossbar.vcd spi-master.vcd timeout.vcd uart-rx.vcd uart-tx.vcd
+
+TARGET	+= bitbang.vcd crossbar.vcd
+TARGET	+= spi-master.vcd timeout.vcd uart-rx.vcd uart-tx.vcd
 
 .PHONY: all clean prog
 
@@ -17,3 +19,5 @@ VC ?= iverilog -gspecify -I$(LIBRARY)
 
 clean:
 	$(RM) *.vcd *.vvp
+
+bitbang.vcd: hello-rom.v
