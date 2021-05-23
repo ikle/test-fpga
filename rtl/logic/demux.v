@@ -12,7 +12,7 @@
 module demux #(
 	parameter W = 4, N = 13
 )(
-	input [W-1:0] s, input d, output [N-1:0] q
+	input d, input [W-1:0] s, output [N-1:0] q
 );
 	assign q = {{N-1 {1'b0}}, d} << s;
 endmodule

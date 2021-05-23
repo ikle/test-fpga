@@ -29,8 +29,8 @@ module crossbar #(
 	wire [IN-1:0]  si;  /* select input  */
 	wire [OUT-1:0] so;  /* select output */
 
-	demux #(W, IN)  di (ai, 1'b1, si);
-	demux #(W, OUT) do (ao, 1'b1, so);
+	demux #(W, IN)  di (1'b1, ai, si);
+	demux #(W, OUT) do (1'b1, ao, so);
 
 	genvar i;
 
