@@ -6,8 +6,8 @@
  * SPDX-License-Identifier: BSD-2-Clause
  */
 
-`ifndef CROSSBAR_V
-`define CROSSBAR_V  1
+`ifndef NET_CROSSBAR_V
+`define NET_CROSSBAR_V  1
 
 `include "logic/demux.v"
 
@@ -40,4 +40,4 @@ module crossbar #(
 	end
 endmodule
 
-`endif  /* CROSSBAR_V */
+`endif  /* NET_CROSSBAR_V */

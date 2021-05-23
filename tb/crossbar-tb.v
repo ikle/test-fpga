@@ -8,7 +8,7 @@
 
 `timescale 1ns / 100ps
 
-`include "crossbar.v"
+`include "net/crossbar.v"
 
 module tb;
 	reg clock = 1, reset = 0;
