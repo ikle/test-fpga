@@ -12,7 +12,7 @@
 module bitbang #(
 	parameter W = 16
 )(
-	input reset, input clock,
+	input clock, input reset,
 	input  [W-1:0] in,  output reg get, input empty,
 	output [W-1:0] out, output reg put,
 	input rx, output tx

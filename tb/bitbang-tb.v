@@ -12,7 +12,9 @@
 `include "hello-rom.v"
 
 module tb;
-	reg reset, clock = 0;
+	reg clock = 0, reset;
+
+	always	# 2.5	clock = ~clock;
 
 	initial begin
 		# 10	reset <= 1;
@@ -20,15 +22,13 @@ module tb;
 		# 625	$finish;
 	end
 
-	always	# 2.5	clock = ~clock;
-
 	wire [7:0] in, out;
 	wire empty, get, put;
 	wire spi_cs_n, spi_clock, spi_mosi, spi_miso;
 
 	hello_rom rom (clock, reset, get, in, empty);
 
-	spi_master #(8) spi (reset, clock, in, get, empty, out, put,
+	spi_master #(8) spi (clock, reset, in, get, empty, out, put,
 			     spi_cs_n, spi_clock, spi_mosi, spi_miso);
 
 	assign spi_miso = spi_mosi;  /* echo back */
