@@ -10,6 +10,7 @@
 
 `include "timer/alarm.v"
 `include "timer/pulse.v"
+`include "timer/strobe.v"
 `include "timer/timeout.v"
 
 module tb;
@@ -25,17 +26,19 @@ module tb;
 
 	reg [7:0] value;
 	reg put = 0;
-	wire bell, full, act;
+	wire bell, full, act, beep;
 
 	initial begin
-		# 40	value <= 8'h19;
+		# 40	value <= 8'h11;
 		# 5	put   <= 1;
 		# 5	put   <= 0;
+		# 70	value <= 8'h07;
 	end
 
 	alarm   t0 (reset, clock, value, put, bell);
 	timeout t1 (reset, clock, value, put, full);
 	pulse   t2 (reset, clock, value, put, act);
+	strobe  t3 (reset, clock, value, put, beep);
 
 	initial begin
 		$dumpfile ("timer.vcd");
