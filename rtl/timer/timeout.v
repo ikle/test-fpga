@@ -14,12 +14,13 @@
 module timeout #(
 	parameter W = 8
 )(
-	input clock, input reset,
+	input clock,
+	input [W-1:0] start, input reset,
 	input [W-1:0] value, input put, output full
 );
 	wire [W-1:0] count;
 
-	countdown #(W) c (clock, reset, value, put, count);
+	countdown #(W) c (clock, start, reset, value, put, count);
 
 	assign full = (count > 0);
 endmodule

@@ -37,11 +37,11 @@ module tb;
 		# 70	value <= 8'h07;
 	end
 
-	alarm   t0 (clock, reset, value, put, bell);
-	timeout t1 (clock, reset, value, put, full);
-	pulse   t2 (clock, reset, value, put, act);
-	strobe  t3 (clock, reset, value, put, beep);
-	strobe  t4 (clock, reset, 8'h05, reset, sync);
+	alarm   t0 (clock, 8'b0, reset, value, put, bell);
+	timeout t1 (clock, 8'b0, reset, value, put, full);
+	pulse   t2 (clock, 8'b0, reset, value, put, act);
+	strobe  t3 (clock, 8'b0, reset, value, put, beep);
+	strobe  t4 (clock, 8'b0, reset, 8'h05, reset, sync);
 
 	initial begin
 		$dumpfile ("timer.vcd");

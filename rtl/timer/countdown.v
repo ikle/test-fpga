@@ -12,7 +12,8 @@
 module countdown #(
 	parameter W = 8
 )(
-	input clock, input reset,
+	input clock,
+	input [W-1:0] start, input reset,
 	input [W-1:0] value, input put, output reg [W-1:0] count
 );
 	always @(posedge clock)
@@ -20,7 +21,7 @@ module countdown #(
 			count <= value;
 		else
 		if (reset)
-			count <= 0;
+			count <= start;
 		else
 		if (count > 0)
 			count <= count - 1;
