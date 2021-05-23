@@ -41,7 +41,7 @@ module tb;
 	timeout t1 (clock, 8'b0, reset, value, put, full);
 	pulse   t2 (clock, 8'b0, reset, value, put, act);
 	strobe  t3 (clock, 8'b0, reset, value, put, beep);
-	strobe  t4 (clock, 8'b0, reset, 8'h05, reset, sync);
+	strobe  t4 (clock, 8'h05, reset, 8'b0, 1'b0, sync);
 
 	initial begin
 		$dumpfile ("timer.vcd");
