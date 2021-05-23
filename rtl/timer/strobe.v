@@ -23,11 +23,11 @@ module strobe #(
 	wire load;
 
 	always @(posedge clock)
-		if (put)
-			period <= value;
-		else
 		if (reset)
 			period <= start;
+		else
+		if (put)
+			period <= value;
 
 	assign load = (put | count == 1);
 

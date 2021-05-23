@@ -17,11 +17,11 @@ module countdown #(
 	input [W-1:0] value, input put, output reg [W-1:0] count
 );
 	always @(posedge clock)
-		if (put)
-			count <= value;
-		else
 		if (reset)
 			count <= start;
+		else
+		if (put)
+			count <= value;
 		else
 		if (count > 0)
 			count <= count - 1;
