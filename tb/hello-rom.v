@@ -12,7 +12,7 @@
 module hello_rom #(
 	parameter W = 8
 )(
-	input reset, input clock,
+	input clock, input reset,
 	input get, output reg [W-1:0] out, output empty
 );
 	localparam N  = 7;
