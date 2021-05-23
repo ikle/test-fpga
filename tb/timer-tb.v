@@ -32,6 +32,8 @@ module tb;
 		# 40	value <= 8'h11;
 		# 5	put   <= 1;
 		# 5	put   <= 0;
+		# 10	put   <= 1;
+		# 5	put   <= 0;
 		# 70	value <= 8'h07;
 	end
 
