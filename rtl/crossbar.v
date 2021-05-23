@@ -9,13 +9,7 @@
 `ifndef CROSSBAR_V
 `define CROSSBAR_V  1
 
-module demux #(
-	parameter W = 4, N = 13
-)(
-	input [W-1:0] s, input d, output [N-1:0] q
-);
-	assign q = {{N-1 {1'b0}}, d} << s;
-endmodule
+`include "logic/demux.v"
 
 module crossbar #(
 	parameter W = 8, IN = 8, OUT = 8
