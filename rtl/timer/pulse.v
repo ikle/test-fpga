@@ -16,14 +16,13 @@ module pulse #(
 )(
 	input clock,
 	input [W-1:0] start, input reset,
-	input [W-1:0] value, input put, output reg act
+	input [W-1:0] value, input put, output act
 );
 	wire [W-1:0] count;
 
 	countdown #(W) c (clock, start, reset, value, put, count);
 
-	always @(posedge clock)
-		act <= (count == 1);
+	assign act = (count == 1);
 endmodule
 
 `endif  /* TIMER_PULSE_V */
