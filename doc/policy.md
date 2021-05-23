@@ -7,3 +7,8 @@
    clock input. If required, it must be followed by an input for the state
    initialization value on reset. The next should be the reset input itself.
 
+# Synchronization
+
+1. For synchronous circuits, the timeslot must start with the rising edge of
+   the clock.
+
