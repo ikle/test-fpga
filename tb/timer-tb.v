@@ -14,15 +14,15 @@
 `include "timer/timeout.v"
 
 module tb;
-	reg reset, clock = 1;
+	reg clock = 1, reset;
+
+	always	# 2.5	clock = ~clock;
 
 	initial begin
 		# 10	reset <= 1;
 		# 13	reset <= 0;
 		# 327	$finish;
 	end
-
-	always	# 2.5	clock = ~clock;
 
 	reg [7:0] value;
 	reg put = 0;
