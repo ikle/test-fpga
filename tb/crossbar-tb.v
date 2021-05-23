@@ -37,23 +37,23 @@ module tb;
 
 	initial begin
 		# 80	put <= 1; from <=  0; to <= 0;
-		# 10	put <= 0;
-		# 70	put <= 1; from <=  2; to <= 3;
-		# 10	put <= 0;
-		# 50	put <= 1; from <=  1; to <= 0;
-		# 10	put <= 0;
-		# 80	put <= 1; from <= -1; to <= 0;  /* unsubscribe */
-		# 10	put <= 0;
-		# 60	put <= 1; from <=  3; to <= 2;
-		# 10	put <= 0;
-		# 90	put <= 1; from <=  3; to <= 1;
-		# 10	put <= 0;
-		# 80	put <= 1; from <= -1; to <= 3;  /* unsubscribe */
-		# 10	put <= 0;
-		# 60	put <= 1; from <=  6; to <= 1;  /* unsubscribe */
-		# 10	put <= 0;
-		# 70	put <= 1; from <= -1; to <= 2;  /* unsubscribe */
-		# 10	put <= 0;
+		# 5	put <= 0;
+		# 75	put <= 1; from <=  2; to <= 3;
+		# 5	put <= 0;
+		# 55	put <= 1; from <=  1; to <= 0;
+		# 5	put <= 0;
+		# 85	put <= 1; from <= -1; to <= 0;  /* unsubscribe */
+		# 5	put <= 0;
+		# 65	put <= 1; from <=  3; to <= 2;
+		# 5	put <= 0;
+		# 95	put <= 1; from <=  3; to <= 1;
+		# 5	put <= 0;
+		# 85	put <= 1; from <= -1; to <= 3;  /* unsubscribe */
+		# 5	put <= 0;
+		# 65	put <= 1; from <=  6; to <= 1;  /* unsubscribe */
+		# 5	put <= 0;
+		# 75	put <= 1; from <= -1; to <= 2;  /* unsubscribe */
+		# 5	put <= 0;
 	end
 
 	wire [3:0] out;
