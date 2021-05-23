@@ -6,10 +6,14 @@
  * SPDX-License-Identifier: BSD-2-Clause
  */
 
+`timescale 1ns / 100ps
+
 `include "crossbar.v"
 
 module tb;
-	reg reset = 0;
+	reg clock = 1, reset = 0;
+
+	always	# 2.5	clock = ~clock;
 
 	initial begin
 		# 40	reset <= 1;
@@ -54,7 +58,7 @@ module tb;
 
 	wire [3:0] out;
 
-	crossbar #(3, 4, 4) cb0 (reset, in, out, from, to, put);
+	crossbar #(3, 4, 4) cb0 (clock, reset, in, out, from, to, put);
 
 	wire e, f, g, h;
 

@@ -14,35 +14,27 @@
 module crossbar #(
 	parameter W = 8, IN = 8, OUT = 8
 )(
-	input reset,
+	input clock, input reset,
 	input [IN-1:0] in, output [OUT-1:0] out,
-	input [W-1:0] from, input [W-1:0] to, (* noglobal *) input put
+	input signed [W-1:0] from, input [W-1:0] to, input put
 );
-	reg signed [W-1:0] ai, ao;
-
-	/* latch addresses to save power in demuxes and to reduce EMI */
-	always @(posedge put) begin #1
-		ai <= from;
-		ao <= to;
-	end
-
 	wire [IN-1:0]  si;  /* select input  */
 	wire [OUT-1:0] so;  /* select output */
 
-	demux #(W, IN)  di (1'b1, ai, si);
-	demux #(W, OUT) do (1'b1, ao, so);
+	demux #(W, IN)  di (put, from, si);
+	demux #(W, OUT) do (put, to,   so);
 
 	genvar i;
 
 	for (i = 0; i < OUT; i = i + 1) begin : column
 		reg  [IN-1:0] state;
 
-		always @(posedge reset or negedge put) #1
+		always @(posedge clock)
 			if (reset)
 				state <= {IN {1'b0}};
 			else
 			if (so[i])
-				state <= (ai < 0) ? {IN {1'b0}} : state | si;
+				state <= (from < 0) ? {IN {1'b0}} : state | si;
 
 		assign out[i] = | (state & in);
 	end
