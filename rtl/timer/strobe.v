@@ -14,7 +14,7 @@
 module strobe #(
 	parameter W = 8
 )(
-	input reset, input clock,
+	input clock, input reset,
 	input [W-1:0] value, input put, output act
 );
 	reg  [W-1:0] period;
@@ -30,7 +30,7 @@ module strobe #(
 
 	assign load = (put | count == 1);
 
-	countdown #(W) c (reset, clock, put ? value : period, load, count);
+	countdown #(W) c (clock, reset, put ? value : period, load, count);
 
 	assign act = (count == 1);
 endmodule

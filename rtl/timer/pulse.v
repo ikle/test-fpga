@@ -14,12 +14,12 @@
 module pulse #(
 	parameter W = 8
 )(
-	input reset, input clock,
+	input clock, input reset,
 	input [W-1:0] value, input put, output reg act
 );
 	wire [W-1:0] count;
 
-	countdown #(W) c (reset, clock, value, put, count);
+	countdown #(W) c (clock, reset, value, put, count);
 
 	always @(posedge clock)
 		act <= (count == 1);
