@@ -26,7 +26,7 @@ module tb;
 
 	reg [7:0] value;
 	reg put = 0;
-	wire bell, full, act, beep;
+	wire bell, full, act, beep, sync;
 
 	initial begin
 		# 40	value <= 8'h11;
@@ -41,6 +41,7 @@ module tb;
 	timeout t1 (reset, clock, value, put, full);
 	pulse   t2 (reset, clock, value, put, act);
 	strobe  t3 (reset, clock, value, put, beep);
+	strobe  t4 (reset, clock, 8'h05, reset, sync);
 
 	initial begin
 		$dumpfile ("timer.vcd");
