@@ -28,7 +28,7 @@ module tb;
 
 	hello_rom rom (clock, reset, get, in, empty);
 
-	spi_master #(8) spi (clock, reset, in, get, empty, out, put,
+	spi_master #(8) spi (clock, reset, 1'b1, in, get, empty, out, put,
 			     spi_cs_n, spi_clock, spi_mosi, spi_miso);
 
 	assign spi_miso = spi_mosi;  /* echo back */
