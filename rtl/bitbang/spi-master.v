@@ -16,7 +16,7 @@
 module spi_master #(
 	parameter W = 8
 )(
-	input clock, input reset, input enable,
+	input clock, input reset, input step,
 	input  [W-1:0] in,  output get, input empty,
 	output [W-1:0] out, output put,
 	/* input [1:0] mode, */
@@ -26,10 +26,10 @@ module spi_master #(
 
 	wire [BW-1:0] ai, bi, ci, do;
 
-	bitbang #(BW) a (clock, reset, enable, ai,    , empty,   ,    , 1'b1, spi_cs_n );
-	bitbang #(BW) b (clock, reset, enable, bi,    , empty,   ,    , 1'b0, spi_clock);
-	bitbang #(BW) c (clock, reset, enable, ci, get, empty,   ,    , 1'b0, spi_mosi );
-	bitbang #(BW) d (clock, reset, enable, do,    , empty, do, put, spi_miso,      );
+	bitbang #(BW) a (clock, reset, step, ai,    , empty,   ,    , 1'b1, spi_cs_n );
+	bitbang #(BW) b (clock, reset, step, bi,    , empty,   ,    , 1'b0, spi_clock);
+	bitbang #(BW) c (clock, reset, step, ci, get, empty,   ,    , 1'b0, spi_mosi );
+	bitbang #(BW) d (clock, reset, step, do,    , empty, do, put, spi_miso,      );
 
 	assign ai = {W {2'b00}};	/* cs_n active low */
 	assign bi = {W {2'b01}};	/* clock mode 0    */

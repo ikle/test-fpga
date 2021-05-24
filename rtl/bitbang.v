@@ -12,7 +12,7 @@
 module bitbang #(
 	parameter W = 16
 )(
-	input clock, input reset, input enable,
+	input clock, input reset, input step,
 	input  [W-1:0] in,  output reg get, input empty,
 	output [W-1:0] out, output reg put,
 	input rx, output tx
@@ -24,9 +24,9 @@ module bitbang #(
 	reg got;
 	wire consume, shift, emit;
 
-	assign consume = enable & (got & count < 2);
-	assign shift   = enable & (count > 0);
-	assign emit    = enable & (count == 1);
+	assign consume = step & (got & count < 2);
+	assign shift   = step & (count > 0);
+	assign emit    = step & (count == 1);
 
 	always @(posedge clock)
 		if (reset) begin
