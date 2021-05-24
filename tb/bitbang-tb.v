@@ -9,6 +9,8 @@
 `timescale 1ns / 100ps
 
 `include "bitbang/spi-master.v"
+`include "timer/strobe.v"
+
 `include "hello-rom.v"
 
 module tb;
@@ -19,8 +21,12 @@ module tb;
 	initial begin
 		# 10	reset <= 1;
 		# 13	reset <= 0;
-		# 625	$finish;
+		# 1875	$finish;
 	end
+
+	wire step;
+
+	strobe #(2) t0 (clock, 2'h3, reset, 2'h0, 1'b0, step);
 
 	wire [7:0] in, out;
 	wire empty, get, put;
@@ -28,7 +34,7 @@ module tb;
 
 	hello_rom rom (clock, reset, get, in, empty);
 
-	spi_master #(8) spi (clock, reset, 1'b1, in, get, empty, out, put,
+	spi_master #(8) spi (clock, reset, step, in, get, empty, out, put,
 			     spi_cs_n, spi_clock, spi_mosi, spi_miso);
 
 	assign spi_miso = spi_mosi;  /* echo back */
