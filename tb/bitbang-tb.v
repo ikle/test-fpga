@@ -21,7 +21,7 @@ module tb;
 	initial begin
 		# 10	reset <= 1;
 		# 13	reset <= 0;
-		# 1875	$finish;
+		# 1825	$finish;
 	end
 
 	wire step;
