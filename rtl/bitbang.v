@@ -22,17 +22,22 @@ module bitbang #(
 	reg [CW-1:0] count;
 	reg [W:0] state;
 	reg got;
+	wire consume, shift, emit;
+
+	assign consume = (got & count < 2);
+	assign shift   = (count > 0);
+	assign emit    = (count == 1);
 
 	always @(posedge clock)
 		if (reset) begin
 			count <= 0;
 			state <= {W+1 {rx}};
 		end
-		else if (got & count < 2) begin
+		else if (consume) begin
 			count <= W;  /* add & use size argument, pad with rx? */
 			state <= {in, rx};
 		end
-		else if (count > 0) begin
+		else if (shift) begin
 			count <= count - 1;
 			state <= {state[W-1:0], rx};
 		end
@@ -41,11 +46,11 @@ module bitbang #(
 		if (reset | get)
 			get <= 0;
 		else
-		if (!got | got & count < 2)
+		if (!got | consume)
 			get <= !empty;
 
 	always @(posedge clock)
-		if (reset | got & count < 2)
+		if (reset | consume)
 			got <= 0;
 		else
 		if (get)
@@ -55,7 +60,7 @@ module bitbang #(
 		if (reset | put)
 			put <= 0;
 		else
-			put <= (count == 1);
+			put <= emit;
 
 	assign out = state[W-1:0];
 	assign tx  = state[W];
