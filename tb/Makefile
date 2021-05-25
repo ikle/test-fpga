@@ -2,6 +2,7 @@ LIBRARY	= $(CURDIR)/../rtl
 
 TARGET	+= timer.vcd
 TARGET	+= bitbang.vcd crossbar.vcd
+TARGET	+= spi-display.vcd
 TARGET	+= spi-master.vcd timeout.vcd uart-rx.vcd uart-tx.vcd
 
 .PHONY: all clean prog
@@ -22,3 +23,4 @@ clean:
 	$(RM) *.vcd *.vvp
 
 bitbang.vcd: hello-rom.v
+spi-display.vcd: hello-rom.v

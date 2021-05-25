@@ -1,0 +1,35 @@
+// SWRESET
+001
+// SLPOUT
+011
+// MADCTL
+036
+100
+// INVON
+021
+// NORON
+013
+// DISPON
+029
+
+// image format
+
+// COLMOD, 18-bit color
+03A
+166
+
+// write to (0, 0, 240, 240)
+
+// CASET
+02A
+100 100		// x start = 0
+100 1EF		// x end   = 240
+// RASET
+02B
+100 100		// y start = 0
+100 1EF		// y end   = 240
+// RAMWR
+02C
+
+// image data
+
