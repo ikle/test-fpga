@@ -10,19 +10,19 @@
 `define HELLO_ROM_V  1
 
 module hello_rom #(
-	parameter W = 8, FILE = "hello-rom.hex", N = 7
+	parameter W = 8, FILE = "hello-rom.hex", SIZE = 7
 )(
 	input clock, input reset,
 	input get, output reg [W-1:0] out, output empty
 );
-	localparam AW = $clog2 (N + 1);
+	localparam AW = $clog2 (SIZE + 1);
 
 	reg [AW-1:0] index;
-	reg [W-1:0] m[0:N-1];
+	reg [W-1:0] m[0:SIZE-1];
 
 	initial $readmemh (FILE, m);
 
-	assign empty = (index == N);
+	assign empty = (index == SIZE);
 
 	always @(posedge clock)
 		if (reset)
