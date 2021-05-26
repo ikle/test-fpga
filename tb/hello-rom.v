@@ -20,7 +20,8 @@ module hello_rom #(
 	reg [AW-1:0] index;
 	reg [W-1:0] m[0:SIZE-1];
 
-	initial $readmemh (FILE, m);
+	initial if (FILE != "")
+		$readmemh (FILE, m);
 
 	assign empty = (index == SIZE);
 
