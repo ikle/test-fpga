@@ -9,9 +9,8 @@
 `timescale 1ns / 100ps
 
 `include "bitbang/spi-master.v"
+`include "mem/rom-seq.v"
 `include "timer/strobe.v"
-
-`include "hello-rom.v"
 
 module tb;
 	reg clock = 0, reset;
@@ -32,7 +31,7 @@ module tb;
 	wire empty, get, put;
 	wire spi_cs_n, spi_clock, spi_mosi, spi_miso;
 
-	hello_rom #(8, "hello.hex", 7) rom (clock, reset, get, in, empty);
+	rom_seq #(8, "hello.hex", 7) rom (clock, reset, get, in, empty);
 
 	spi_master #(8) spi (clock, reset, step, in, get, empty, out, put,
 			     spi_cs_n, spi_clock, spi_mosi, spi_miso);

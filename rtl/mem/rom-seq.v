@@ -1,16 +1,16 @@
 /*
- * Test Sequental ROM Module
+ * Sequental ROM Module
  *
  * Copyright (c) 2021 Alexei A. Smekalkine <ikle@ikle.ru>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
 
-`ifndef HELLO_ROM_V
-`define HELLO_ROM_V  1
+`ifndef MEM_ROM_SEQ_V
+`define MEM_ROM_SEQ_V  1
 
-module hello_rom #(
-	parameter W = 8, FILE = "hello.hex", SIZE = 7
+module rom_seq #(
+	parameter W = 8, FILE = "", SIZE = 256
 )(
 	input clock, input reset,
 	input get, output reg [W-1:0] out, output empty
@@ -35,4 +35,4 @@ module hello_rom #(
 		end
 endmodule
 
-`endif  /* HELLO_ROM_V */
+`endif  /* MEM_ROM_SEQ_V */

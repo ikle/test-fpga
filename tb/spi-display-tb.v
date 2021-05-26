@@ -9,9 +9,8 @@
 `timescale 1ns / 100ps
 
 `include "bitbang/spi-display.v"
+`include "mem/rom-seq.v"
 `include "timer/strobe.v"
-
-`include "hello-rom.v"
 
 module tb;
 	reg clock = 0, reset;
@@ -32,7 +31,7 @@ module tb;
 	wire empty, get;
 	wire spi_cs_n, spi_clock, spi_dc, spi_mosi;
 
-	hello_rom #(9, "spi-display.hex", 20) rom (clock, reset, get, in, empty);
+	rom_seq #(9, "spi-display.hex", 20) rom (clock, reset, get, in, empty);
 
 	spi_display sd (clock, reset, step, in[8], in[7:0], get, empty,
 			     spi_cs_n, spi_clock, spi_dc, spi_mosi);

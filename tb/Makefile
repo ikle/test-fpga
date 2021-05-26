@@ -21,6 +21,3 @@ VC ?= iverilog -gspecify -I$(LIBRARY)
 
 clean:
 	$(RM) *.vcd *.vvp
-
-bitbang.vcd: hello-rom.v
-spi-display.vcd: hello-rom.v
