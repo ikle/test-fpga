@@ -1,6 +1,6 @@
 # Module interface policy
 
-1. All combinatorial modules must have a dedicated reset input.
+1. All sequential modules must have a dedicated reset input.
 2. The reset input for asynchronous circuits must be the first parameter of
    the module. The next parameter should be the main clock input, if required.
 3. For synchronous circuits, the first parameter of the module must be the
