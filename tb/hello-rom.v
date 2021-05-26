@@ -10,7 +10,7 @@
 `define HELLO_ROM_V  1
 
 module hello_rom #(
-	parameter W = 8, FILE = "hello-rom.hex", SIZE = 7
+	parameter W = 8, FILE = "hello.hex", SIZE = 7
 )(
 	input clock, input reset,
 	input get, output reg [W-1:0] out, output empty
