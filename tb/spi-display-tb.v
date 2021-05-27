@@ -27,14 +27,17 @@ module tb;
 
 	strobe #(2) t0 (clock, 2'h3, reset, 2'h0, 1'b0, step);
 
-	wire [8:0] in;
-	wire empty, get;
+	wire [8:0] rom_in;
+	wire rom_get, rom_empty;
 	wire spi_cs_n, spi_clock, spi_dc, spi_mosi;
 
-	rom_seq #(9, "spi-display.hex", 20) rom (clock, reset, in, get, empty);
+	rom_seq #(9, "spi-display.hex", 20)
+		rom (clock, reset, rom_in, rom_get, rom_empty);
 
-	spi_display display (clock, reset, step, in[8], in[7:0], get, empty,
-			     spi_cs_n, spi_clock, spi_dc, spi_mosi);
+	spi_display
+		display (clock, reset, step,
+			 rom_in[8], rom_in[7:0], rom_get, rom_empty,
+			 spi_cs_n, spi_clock, spi_dc, spi_mosi);
 
 	initial begin
 		$dumpfile ("spi-display.vcd");
