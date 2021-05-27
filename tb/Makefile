@@ -1,7 +1,7 @@
 LIBRARY	= $(CURDIR)/../rtl
 
 TARGET	+= timer.vcd
-TARGET	+= bitbang.vcd crossbar.vcd
+TARGET	+= bitbang.vcd crossbar.vcd prefetch.vcd
 TARGET	+= spi-display.vcd
 TARGET	+= spi-master.vcd timeout.vcd uart-rx.vcd uart-tx.vcd
 
