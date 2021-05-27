@@ -47,7 +47,7 @@ module tb;
 	wire get_i, empty_i, empty_o;
 	reg get_o;
 
-	rom_seq #(8, "hello.hex", 7) rom (clock, reset, get_i, in, empty_i);
+	rom_seq #(8, "hello.hex", 7) rom (clock, reset, in, get_i, empty_i);
 	delay #(8) d0 (clock, reset, in, get_i, empty_i, out, get_o, empty_o);
 
 	always @(posedge clock)
