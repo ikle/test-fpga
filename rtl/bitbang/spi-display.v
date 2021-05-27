@@ -25,7 +25,7 @@ module spi_display #(
 
 	wire [BW-1:0] di = {BW {dc}};
 
-	bitbang #(BW) d (clock, reset, step, di, get, empty, , , 1'b0, spi_dc);
+	bitbang #(BW) d (clock, reset, step, di, , empty, , , 1'b0, spi_dc);
 endmodule
 
 `endif  /* BITBANG_SPI_DISPLAY_V */
