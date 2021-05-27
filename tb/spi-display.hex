@@ -1,34 +1,35 @@
-// SWRESET
+// SWRESET - soft reset
 001
-// SLPOUT
+// SLPOUT  - exit sleep mode
 011
-// MADCTL
+// MADCTL  - set address mode
 036
 100
-// INVON
+// INVON   - enter inver mode
 021
-// NORON
+// NORON   - enter normal mode
 013
-// DISPON
+// DISPON  - set display on
 029
 
 // image format
 
-// COLMOD, 18-bit color
+// COLMOD  - set pixel format
 03A
-166
+166		// 18-bit color
 
 // write to (0, 0, 240, 240)
 
-// CASET
+// CASET   - set column address
 02A
 100 100		// x start = 0
 100 1EF		// x end   = 240
-// RASET
+// RASET   - set page address
 02B
 100 100		// y start = 0
 100 1EF		// y end   = 240
-// RAMWR
+
+// RAMWR   - write memory start
 02C
 
 // image data
