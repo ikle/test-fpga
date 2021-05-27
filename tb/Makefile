@@ -21,3 +21,7 @@ VC ?= iverilog -gspecify -I$(LIBRARY)
 
 clean:
 	$(RM) *.vcd *.vvp
+
+bitbang.vcd:     hello.hex
+prefetch.vcd:    hello.hex
+spi-display.vcd: spi-display.hex
