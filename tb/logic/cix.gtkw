@@ -1,0 +1,35 @@
+[*]
+[*] GTKWave Analyzer v3.3.79 (w)1999-2017 BSI
+[*] Wed May 18 13:48:46 2022
+[*]
+[dumpfile] "cix.vcd"
+[dumpfile_mtime] "Wed May 18 13:46:16 2022"
+[dumpfile_size] 54971
+[savefile] "cix.gtkw"
+[timestart] 0
+[size] 1912 600
+[pos] -1 -1
+*-13.879145 14120 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] tb.
+[sst_width] 197
+[signals_width] 162
+[sst_expanded] 1
+[sst_vpaned_height] 228
+@28
+tb.reset
+tb.clock
+@200
+-popcount
+@22
+tb.A.in[7:0]
+@24
+tb.A.out[3:0]
+@200
+-ctz
+@22
+tb.B.in[7:0]
+@24
+tb.B.out[3:0]
+tb.B.any
+[pattern_trace] 1
+[pattern_trace] 0
