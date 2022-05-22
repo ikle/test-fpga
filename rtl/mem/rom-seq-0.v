@@ -1,15 +1,15 @@
 /*
  * Sequental ROM Module
  *
- * Copyright (c) 2021 Alexei A. Smekalkine <ikle@ikle.ru>
+ * Copyright (c) 2021-2022 Alexei A. Smekalkine <ikle@ikle.ru>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
 
-`ifndef MEM_ROM_SEQ_V
-`define MEM_ROM_SEQ_V  1
+`ifndef MEM_ROM_SEQ_0_V
+`define MEM_ROM_SEQ_0_V  1
 
-module rom_seq #(
+module rom_seq_0 #(
 	parameter W = 8, FILE = "", SIZE = 256
 )(
 	input clock, input reset,
@@ -35,4 +35,4 @@ module rom_seq #(
 		end
 endmodule
 
-`endif  /* MEM_ROM_SEQ_V */
+`endif  /* MEM_ROM_SEQ_0_V */

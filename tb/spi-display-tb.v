@@ -1,7 +1,7 @@
 /*
  * SPI Display Testbench
  *
- * Copyright (c) 2018-2021 Alexei A. Smekalkine <ikle@ikle.ru>
+ * Copyright (c) 2018-2022 Alexei A. Smekalkine <ikle@ikle.ru>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -10,7 +10,7 @@
 
 `include "bitbang/spi-display.v"
 `include "display/dcs-filter.v"
-`include "mem/rom-seq.v"
+`include "mem/rom-seq-0.v"
 `include "timer/strobe.v"
 
 module tb;
@@ -33,7 +33,7 @@ module tb;
 	wire rom_get, rom_empty, dcs_dc, dcs_get, dcs_empty;
 	wire spi_cs_n, spi_clock, spi_dc, spi_mosi;
 
-	rom_seq #(9, "spi-display.hex", 20)
+	rom_seq_0 #(9, "spi-display.hex", 20)
 		rom (clock, reset, rom_in, rom_get, rom_empty);
 
 	dcs_filter #(8, 8_000, 10)

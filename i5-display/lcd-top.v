@@ -1,14 +1,14 @@
 /*
  * ST7789 240x240 SPI TFT LCD Test
  *
- * Copyright (c) 2021 Alexei A. Smekalkine <ikle@ikle.ru>
+ * Copyright (c) 2021-2022 Alexei A. Smekalkine <ikle@ikle.ru>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
 
 `include "bitbang/spi-display.v"
 `include "display/dcs-filter.v"
-`include "mem/rom-seq.v"
+`include "mem/rom-seq-0.v"
 `include "reset.v"
 `include "timer/strobe.v"
 
@@ -33,7 +33,7 @@ module top #(
 	wire rom_get, rom_empty, dcs_dc, dcs_get, dcs_empty;
 	wire LCD_cs_n, LCD_clock, LCD_dc, LCD_mosi;
 
-	rom_seq #(9, "machaon.hex", 20 + 720 * 10)
+	rom_seq_0 #(9, "machaon.hex", 20 + 720 * 10)
 		rom (osc, reset_s, rom_in, rom_get, rom_empty);
 
 	dcs_filter #(8, FREQ, DELAY)
