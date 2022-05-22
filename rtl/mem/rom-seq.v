@@ -12,8 +12,8 @@
 module rom_seq #(
 	parameter W = 8, FILE = "", SIZE = 256
 )(
-	input clock, input reset,
-	input req, output valid, output [W-1:0] out
+	input clock, reset, req,
+	output valid, output [W-1:0] out
 );
 	localparam AW = $clog2 (SIZE + 1);
 
