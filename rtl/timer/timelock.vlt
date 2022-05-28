@@ -1,0 +1,3 @@
+`verilator_config
+
+lint_off -msg SYMRSVDWORD -file "rtl/timer/timelock.v" -lines 15
