@@ -10,6 +10,7 @@
 
 `include "logic/popcount.v"
 `include "logic/ctz.v"
+`include "logic/ctz-ng.v"
 
 module tb;
 	localparam ORDER = 3;
@@ -27,11 +28,12 @@ module tb;
 		#1	clock <= ~clock;
 
 	reg  [W-1:0] in;
-	wire [ORDER:0] pout, cout;
-	wire any;
+	wire [ORDER:0] pout, cout, cout_ng;
+	wire any, zero;
 
 	popcount #(ORDER) A (in, pout);
 	ctz      #(ORDER) B (in, cout, any);
+	ctz_ng   #(ORDER) C (in, cout_ng, zero);
 
 	always @(posedge reset or posedge clock)
 		if (reset)
@@ -42,6 +44,7 @@ module tb;
 	always @(negedge clock) begin
 		$display ("popcount (%h) = %d",     in, pout);
 		$display ("ctz      (%h) = %d, %d", in, cout, any);
+		$display ("ctz-ng   (%h) = %d, %d", in, cout_ng, zero);
 	end
 
 	initial begin
