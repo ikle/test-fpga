@@ -8,6 +8,8 @@
 
 `timescale 1ns / 100ps
 
+`include "logic/cix.v"
+
 `include "logic/popcount.v"
 `include "logic/ctz.v"
 `include "logic/ctz-ng.v"
@@ -29,11 +31,16 @@ module tb;
 
 	reg  [W-1:0] in;
 	wire [ORDER:0] pout, cout, cout_ng;
-	wire any, zero;
+	wire [ORDER:0] clz_o, ctz_o, pop_o;
+	wire any, zero, clz_z, ctz_z, pop_z;
 
 	popcount #(ORDER) A (in, pout);
 	ctz      #(ORDER) B (in, cout, any);
 	ctz_ng   #(ORDER) C (in, cout_ng, zero);
+
+	cix      #(ORDER) D (1, 0,  in, clz_o, clz_z);
+	cix      #(ORDER) E (0, 1,  in, ctz_o, ctz_z);
+	cix      #(ORDER) F (1, 1, ~in, pop_o, pop_z);
 
 	always @(posedge reset or posedge clock)
 		if (reset)
@@ -43,8 +50,13 @@ module tb;
 
 	always @(negedge clock) begin
 		$display ("popcount (%h) = %d",     in, pout);
+		$display ("cix-pop  (%h) = %d, %d", in, pop_o, pop_z);
+
 		$display ("ctz      (%h) = %d, %d", in, cout, any);
 		$display ("ctz-ng   (%h) = %d, %d", in, cout_ng, zero);
+		$display ("cix-ctz  (%h) = %d, %d", in, ctz_o, ctz_z);
+
+		$display ("cix-clz  (%h) = %d, %d", in, clz_o, clz_z);
 	end
 
 	initial begin
