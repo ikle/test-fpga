@@ -33,17 +33,16 @@ module cix #(
 			assign zero = ~in;
 		end
 		else begin
-			wire [ORDER-1:0] lo, ho;
+			wire [ORDER-1:0] lo, ho, a, b;
 			wire lz, hz;
-			wire ls, hs;
 
 			cix #(ORDER-1) l (clz, ctz, in[W/2-1:0], lo, lz);
 			cix #(ORDER-1) h (clz, ctz, in[W-1:W/2], ho, hz);
 
-			assign ls = hz | ctz;
-			assign hs = lz | clz;
+			assign a = (hz | ctz) ? lo : 0;
+			assign b = (lz | clz) ? ho : 0;
 
-			assign out  = ({ORDER {ls}} & lo) + ({ORDER {hs}} & ho);
+			assign out  = a  + b;
 			assign zero = lz & hz;
 		end
 	endgenerate
