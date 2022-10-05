@@ -10,14 +10,11 @@
 `define LOGIC_CIX_V  1
 
 /*
- *  clz ctz inv-in  op
+ *  clz ctz  op
  *
- *   1   0    0     clz
- *   0   1    0     ctz
- *   1   1    0     zerocount
- *   1   0    1     clo
- *   0   1    1     cto
- *   1   1    1     popcount
+ *   1   0   clz	= clo (~in)
+ *   0   1   ctz	= cto (~in)
+ *   1   1   zerocount	= popcount (~in)
  */
 module cix #(
 	parameter ORDER = 3
