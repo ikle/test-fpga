@@ -49,14 +49,14 @@ module tb;
 			in <= in + 1;
 
 	always @(negedge clock) begin
-		$display ("popcount (%h) = %d",     in, pout);
-		$display ("cix-pop  (%h) = %d, %d", in, pop_o, pop_z);
+		$display ("popcount     (%h) = %d",     in, pout);
+		$display ("popcount-cix (%h) = %d, %d", in, pop_o, pop_z);
 
-		$display ("ctz      (%h) = %d, %d", in, cout, any);
-		$display ("ctz-ng   (%h) = %d, %d", in, cout_ng, zero);
-		$display ("cix-ctz  (%h) = %d, %d", in, ctz_o, ctz_z);
+		$display ("ctz          (%h) = %d, %d", in, cout, any);
+		$display ("ctz-ng       (%h) = %d, %d", in, cout_ng, zero);
+		$display ("ctz-cix      (%h) = %d, %d", in, ctz_o, ctz_z);
 
-		$display ("cix-clz  (%h) = %d, %d", in, clz_o, clz_z);
+		$display ("clz-cix      (%h) = %d, %d", in, clz_o, clz_z);
 	end
 
 	initial begin
