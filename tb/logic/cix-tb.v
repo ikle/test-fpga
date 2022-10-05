@@ -41,9 +41,9 @@ module tb;
 	ctz      #(ORDER) B (in, cout, any);
 	ctz_ng   #(ORDER) C (in, cout_ng, zero);
 
-	cix      #(ORDER) D (1, 0,  in, clz_o, clz_z);
-	cix      #(ORDER) E (0, 1,  in, ctz_o, ctz_z);
-	cix      #(ORDER) F (1, 1, ~in, pop_o, pop_z);
+	cix      #(ORDER) D (1'b1, 1'b0,  in, clz_o, clz_z);
+	cix      #(ORDER) E (1'b0, 1'b1,  in, ctz_o, ctz_z);
+	cix      #(ORDER) F (1'b1, 1'b1, ~in, pop_o, pop_z);
 
 	align_s  #(ORDER, W) G (in, as_o, as_c);
 	align    #(ORDER, W) H (in, ap_o, ap_c);
