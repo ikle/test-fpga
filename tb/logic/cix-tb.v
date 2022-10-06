@@ -11,6 +11,7 @@
 `include "logic/align.v"
 `include "logic/align-s.v"
 `include "logic/cix.v"
+`include "logic/clz.v"
 
 `include "logic/popcount.v"
 `include "logic/ctz.v"
@@ -34,7 +35,7 @@ module tb;
 	reg  [W-1:0] in;
 	wire [W-1:0] as_o, ap_o;
 	wire [ORDER:0] pout, cout, cout_ng;
-	wire [ORDER:0] clz_o, ctz_o, pop_o, as_c, ap_c;
+	wire [ORDER:0] clz_o, ctz_o, pop_o, as_c, ap_c, clz_c;
 	wire any, zero, clz_z, ctz_z, pop_z;
 
 	popcount #(ORDER) A (in, pout);
@@ -47,6 +48,8 @@ module tb;
 
 	align_s  #(ORDER, W) G (in, as_o, as_c);
 	align    #(ORDER, W) H (in, ap_o, ap_c);
+
+	clz      #(ORDER) I (in, clz_c);
 
 	always @(posedge reset or posedge clock)
 		if (reset)
@@ -65,6 +68,7 @@ module tb;
 		$display ("clz-cix      (%h) = %d, %d", in, clz_o, clz_z);
 		$display ("clz-align-s  (%h) = %d, %x", in, as_c, as_o);
 		$display ("clz-align-p  (%h) = %d, %x", in, ap_c, ap_o);
+		$display ("clz          (%h) = %d",     in, clz_c);
 	end
 
 	initial begin
