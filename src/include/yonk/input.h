@@ -20,8 +20,9 @@ struct input {
 };
 
 struct input_type {
-	void (*free) (struct input *o);
-	int  (*read) (struct input *o, void *buf, unsigned count);
+	void      (*free) (struct input *o);
+	int       (*read) (struct input *o, void *buf, unsigned count);
+	long long (*seek) (struct input *o, long long offset, int whence);
 };
 
 static inline int input_read (struct input *o, void *buf, size_t count)
@@ -44,6 +45,12 @@ static inline struct input *input_pop (struct input *o)
 static inline void input_free (struct input *o)
 {
 	for (; o != NULL; o = input_pop (o)) {}
+}
+
+static inline
+long long input_seek (struct input *o, long long offset, int whence)
+{
+	return o->type->seek (o, offset, whence);
 }
 
 #endif  /* YONK_INPUT_H */

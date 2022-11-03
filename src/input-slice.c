@@ -6,16 +6,19 @@
  * SPDX-License-Identifier: BSD-2-Clause
  */
 
+#include <errno.h>
 #include <stdlib.h>
 
 #include <yonk/input-slice.h>
 
-static void slice_input_free (struct input *o);
-static int  slice_input_read (struct input *o, void *buf, unsigned count);
+static void      slice_input_free (struct input *o);
+static int       slice_input_read (struct input *o, void *buf, unsigned count);
+static long long slice_input_seek (struct input *o, long long offset, int whence);
 
 static const struct input_type slice_input_type = {
 	.free	= slice_input_free,
 	.read	= slice_input_read,
+	.seek	= slice_input_seek,
 };
 
 struct slice_input {
@@ -58,4 +61,10 @@ static int slice_input_read (struct input *O, void *buf, unsigned count)
 		o->avail -= len;
 
 	return len;
+}
+
+static long long slice_input_seek (struct input *O, long long offset, int whence)
+{
+	errno = ENOSYS;
+	return -1;
 }

@@ -14,12 +14,14 @@
 
 #include <zlib.h>
 
-static void zlib_input_free (struct input *o);
-static int  zlib_input_read (struct input *o, void *buf, unsigned count);
+static void      zlib_input_free (struct input *o);
+static int       zlib_input_read (struct input *o, void *buf, unsigned count);
+static long long zlib_input_seek (struct input *o, long long offset, int whence);
 
 static const struct input_type zlib_input_type = {
 	.free	= zlib_input_free,
 	.read	= zlib_input_read,
+	.seek	= zlib_input_seek,
 };
 
 struct zlib_input {
@@ -94,5 +96,11 @@ static int zlib_input_read (struct input *O, void *buf, unsigned count)
 	default:		errno = EILSEQ; break;
 	}
 
+	return -1;
+}
+
+static long long zlib_input_seek (struct input *o, long long offset, int whence)
+{
+	errno = ENOSYS;
 	return -1;
 }

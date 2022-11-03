@@ -14,12 +14,14 @@
 
 #include <lzma.h>
 
-static void xz_input_free (struct input *o);
-static int  xz_input_read (struct input *o, void *buf, unsigned count);
+static void      xz_input_free (struct input *o);
+static int       xz_input_read (struct input *o, void *buf, unsigned count);
+static long long xz_input_seek (struct input *o, long long offset, int whence);
 
 static const struct input_type xz_input_type = {
 	.free	= xz_input_free,
 	.read	= xz_input_read,
+	.seek	= xz_input_seek,
 };
 
 struct xz_input {
@@ -93,5 +95,11 @@ static int xz_input_read (struct input *O, void *buf, unsigned count)
 	default:		errno = EILSEQ; break;
 	}
 
+	return -1;
+}
+
+static long long xz_input_seek (struct input *o, long long offset, int whence)
+{
+	errno = ENOSYS;
 	return -1;
 }

@@ -13,12 +13,14 @@
 
 #include <yonk/input-file.h>
 
-static void file_input_free (struct input *o);
-static int  file_input_read (struct input *o, void *buf, unsigned count);
+static void      file_input_free (struct input *o);
+static int       file_input_read (struct input *o, void *buf, unsigned count);
+static long long file_input_seek (struct input *o, long long offset, int whence);
 
 static const struct input_type file_input_type = {
 	.free	= file_input_free,
 	.read	= file_input_read,
+	.seek	= file_input_seek,
 };
 
 struct file_input {
@@ -57,4 +59,11 @@ static int file_input_read (struct input *O, void *buf, unsigned count)
 	struct file_input *o = (void *) O;
 
 	return read (o->fd, buf, count);
+}
+
+static long long file_input_seek (struct input *O, long long offset, int whence)
+{
+	struct file_input *o = (void *) O;
+
+	return lseek (o->fd, offset, whence);
 }
