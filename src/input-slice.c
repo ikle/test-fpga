@@ -9,7 +9,7 @@
 #include <errno.h>
 #include <stdlib.h>
 
-#include <yonk/input-slice.h>
+#include <yonk/input/slice.h>
 
 static void      slice_input_free (struct input *o);
 static int       slice_input_read (struct input *o, void *buf, unsigned count);

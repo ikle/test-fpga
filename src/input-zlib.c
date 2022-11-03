@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include <yonk/input-zlib.h>
+#include <yonk/input/zlib.h>
 
 #include <zlib.h>
 

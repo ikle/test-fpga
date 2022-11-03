@@ -10,8 +10,8 @@
 #include <stdio.h>
 #include <string.h>
 
-#include <yonk/input-file.h>
-#include <yonk/input-xz.h>
+#include <yonk/input/file.h>
+#include <yonk/input/xz.h>
 
 static int test_xz (const char *path)
 {

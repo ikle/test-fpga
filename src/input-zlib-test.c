@@ -10,8 +10,8 @@
 #include <stdio.h>
 #include <string.h>
 
-#include <yonk/input-file.h>
-#include <yonk/input-zlib.h>
+#include <yonk/input/file.h>
+#include <yonk/input/zlib.h>
 
 static int test_zlib (const char *path)
 {

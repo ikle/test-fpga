@@ -11,7 +11,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-#include <yonk/input-file.h>
+#include <yonk/input/file.h>
 
 static void      file_input_free (struct input *o);
 static int       file_input_read (struct input *o, void *buf, unsigned count);

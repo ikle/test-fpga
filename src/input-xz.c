@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include <yonk/input-xz.h>
+#include <yonk/input/xz.h>
 
 #include <lzma.h>
 
