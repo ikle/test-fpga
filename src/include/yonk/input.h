@@ -12,6 +12,8 @@
 #include <limits.h>
 #include <stddef.h>
 
+typedef unsigned long long input_size_t;
+
 struct input {
 	const struct input_type *type;
 	struct input *next;
