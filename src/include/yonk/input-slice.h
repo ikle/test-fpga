@@ -11,6 +11,6 @@
 
 #include <yonk/input.h>
 
-int input_push_slice (struct input **input, input_size_t len);
+int input_push_slice (struct input **input, long long len);
 
 #endif  /* YONK_INPUT_SLICE_H */

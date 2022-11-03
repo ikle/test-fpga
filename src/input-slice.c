@@ -23,10 +23,10 @@ static const struct input_type slice_input_type = {
 
 struct slice_input {
 	struct input core;
-	input_size_t avail;
+	long long avail;
 };
 
-int input_push_slice (struct input **input, input_size_t len)
+int input_push_slice (struct input **input, long long len)
 {
 	struct slice_input *o;
 
@@ -36,7 +36,7 @@ int input_push_slice (struct input **input, input_size_t len)
 	o->core.type = &slice_input_type;
 	o->core.next = *input;
 
-	o->avail = len;
+	o->avail = len < 0 ? 0 : len;
 
 	*input = &o->core;
 	return 1;
