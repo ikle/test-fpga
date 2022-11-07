@@ -3,9 +3,9 @@ URL = https://github.com/ikle/test-fpga
 
 LIBNAME = fpga-tools
 LIBVER  = 0
-LIBREV  = 0.6
+LIBREV  = 0.7
 
-DEPENDS = liblzma zlib
+DEPENDS = liblz4 liblzma zlib
 
 LDFLAGS	+= -lbz2
 
