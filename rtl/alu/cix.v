@@ -1,13 +1,13 @@
 /*
  * Bit Count Operation Module
  *
- * Copyright (c) 2021-2022 Alexei A. Smekalkine <ikle@ikle.ru>
+ * Copyright (c) 2021-2024 Alexei A. Smekalkine <ikle@ikle.ru>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
 
-`ifndef LOGIC_CIX_V
-`define LOGIC_CIX_V  1
+`ifndef ALU_CIX_V
+`define ALU_CIX_V  1
 
 /*
  *  clz ctz  op
@@ -45,4 +45,4 @@ module cix #(
 	endgenerate
 endmodule
 
-`endif  /* LOGIC_CIX_V */
+`endif  /* ALU_CIX_V */

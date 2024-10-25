@@ -1,16 +1,17 @@
 /*
  * Word Bit Counter Modules Testbench
  *
- * Copyright (c) 2021-2022 Alexei A. Smekalkine <ikle@ikle.ru>
+ * Copyright (c) 2021-2024 Alexei A. Smekalkine <ikle@ikle.ru>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
 
 `timescale 1ns / 100ps
 
+`include "alu/cix.v"
+
 `include "logic/align.v"
 `include "logic/align-s.v"
-`include "logic/cix.v"
 `include "logic/clz.v"
 
 `include "logic/popcount.v"
