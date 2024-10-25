@@ -9,32 +9,35 @@
 `ifndef ALU_CIX_V
 `define ALU_CIX_V  1
 
-/*
- *  top bot  op
- *
- *   1   0   clz	= clo (~in)
- *   0   1   ctz	= cto (~in)
- *   1   1   zerocount	= popcount (~in)
- */
+`define CIX_CTO		3'b010		/* count trailing ones		*/
+`define CIX_CTZ		3'b011		/* count trailing zeroes	*/
+`define CIX_CLO		3'b100		/* count leading ones		*/
+`define CIX_CLZ		3'b101		/* count leading zeroes		*/
+`define CIX_PCNT	3'b110		/* population count		*/
+`define CIX_ZCNT	3'b111		/* count zeroes			*/
+
 module cix #(
 	parameter ORDER = 3
 )(
-	input top, bot,
-	input [W-1:0] in, output [ORDER:0] out, output zero
+	input [2:0] op, input [W-1:0] in, output [ORDER:0] out, output zero
 );
 	localparam W = 2 ** ORDER;
 
+	wire inv = op[0];	/* invert input			*/
+	wire bot = op[1];	/* count low half always	*/
+	wire top = op[2];	/* count top half always	*/
+
 	generate
 		if (ORDER == 0) begin
-			assign out  = ~in;
-			assign zero = ~in;
+			assign out  = in ^ inv;
+			assign zero = in ^ inv;
 		end
 		else begin
 			wire [ORDER-1:0] lo, ho, a, b;
 			wire lz, hz;
 
-			cix #(ORDER-1) l (top, bot, in[W/2-1:0], lo, lz);
-			cix #(ORDER-1) h (top, bot, in[W-1:W/2], ho, hz);
+			cix #(ORDER-1) l (op, in[W/2-1:0], lo, lz);
+			cix #(ORDER-1) h (op, in[W-1:W/2], ho, hz);
 
 			assign a = (hz | bot) ? lo : 0;
 			assign b = (lz | top) ? ho : 0;
