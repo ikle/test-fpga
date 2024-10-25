@@ -1,13 +1,13 @@
 /*
  * Comparator Module
  *
- * Copyright (c) 2021-2022 Alexei A. Smekalkine <ikle@ikle.ru>
+ * Copyright (c) 2021-2024 Alexei A. Smekalkine <ikle@ikle.ru>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
 
-`ifndef LOGIC_CMP_V
-`define LOGIC_CMP_V  1
+`ifndef ALU_CMP_V
+`define ALU_CMP_V  1
 
 module cmp #(
 	parameter ORDER = 3,
@@ -36,4 +36,4 @@ module cmp #(
 	endgenerate
 endmodule
 
-`endif  /* LOGIC_CMP_V */
+`endif  /* ALU_CMP_V */
