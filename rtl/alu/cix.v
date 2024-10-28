@@ -19,7 +19,7 @@
 module cix #(
 	parameter ORDER = 3
 )(
-	input [2:0] op, input [W-1:0] in, output [ORDER:0] out, output zero
+	input [2:0] op, input [W-1:0] in, output [ORDER:0] out, output all
 );
 	localparam W = 2 ** ORDER;
 
@@ -29,21 +29,21 @@ module cix #(
 
 	generate
 		if (ORDER == 0) begin
-			assign out  = in ^ inv;
-			assign zero = in ^ inv;
+			assign out = in ^ inv;
+			assign all = in ^ inv;
 		end
 		else begin
 			wire [ORDER-1:0] lo, ho, a, b;
-			wire lz, hz;
+			wire la, ha;
 
-			cix #(ORDER-1) l (op, in[W/2-1:0], lo, lz);
-			cix #(ORDER-1) h (op, in[W-1:W/2], ho, hz);
+			cix #(ORDER-1) l (op, in[W/2-1:0], lo, la);
+			cix #(ORDER-1) h (op, in[W-1:W/2], ho, ha);
 
-			assign a = (hz | bot) ? lo : 0;
-			assign b = (lz | top) ? ho : 0;
+			assign a = (ha | bot) ? lo : 0;
+			assign b = (la | top) ? ho : 0;
 
-			assign out  = a  + b;
-			assign zero = lz & hz;
+			assign out = a  + b;
+			assign all = la & ha;
 		end
 	endgenerate
 endmodule
