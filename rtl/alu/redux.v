@@ -1,5 +1,5 @@
 /*
- * Parallel Adder Reductor
+ * Parallel M:2 Adder Reductor
  *
  * Copyright (c) 2024 Alexei A. Smekalkine <ikle@ikle.ru>
  *
@@ -11,6 +11,10 @@
 
 `include "alu/redux-3.v"
 
+/*
+ * This module reduces the number of terms in a sum from M to two without
+ * carry propagation.
+ */
 module redux #(
 	parameter W = 8,
 	parameter M = 8
