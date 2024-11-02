@@ -9,6 +9,8 @@
 `ifndef ALU_REDUX_V
 `define ALU_REDUX_V  1
 
+`include "alu/redux-3.v"
+
 module redux #(
 	parameter W = 8,
 	parameter M = 8
@@ -19,20 +21,15 @@ module redux #(
 	localparam R = M % 3;
 
 	generate
-		if (M == 3) begin
-			wire [W-1:0] a = x[0];
-			wire [W-1:0] b = x[1];
-			wire [W-1:0] c = x[2];
-
-			assign q[0] = a ^ b ^ c;
-			assign q[1] = (a & b | a & c | b & c) << 1;
-		end
+		if (M == 3)
+			redux_3 #(W) r3 (x[0], x[1], x[2], q[0], q[1]);
 		else begin
 			wire [W-1:0] y[Q*2+R];
 			genvar i;
 
 			for (i = 0; i < Q; i = i + 1)
-				redux #(W, 3) r3 (x[i*3:i*3+2], y[i*2:i*2+1]);
+				redux_3 #(W) r3 (x[i*3], x[i*3+1], x[i*3+2],
+						 y[i*2], y[i*2+1]);
 
 			for (i = 0; i < R; i = i + 1)
 				assign y[Q*2+i] = x[Q*3+i];
