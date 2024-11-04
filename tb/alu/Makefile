@@ -1,6 +1,6 @@
 LIBRARY	= $(CURDIR)/../../rtl
 
-TARGET	+= cix.vcd
+TARGET	+= cix.vcd redux.vcd
 
 .PHONY: all clean prog
 
@@ -18,3 +18,5 @@ VC	?= iverilog -gspecify -I$(LIBRARY)
 
 clean:
 	$(RM) *.vcd *.vvp
+
+redux.vcd: VFLAGS += -g2005-sv
